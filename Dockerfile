@@ -2,7 +2,7 @@
 #    https://hub.docker.com/r/eiffl/nersc-python-mpi/dockerfile
 
 FROM ubuntu as base
-MAINTAINER dhna
+MAINTAINER Edric-Matwiejew
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
@@ -22,7 +22,7 @@ FROM base as builder
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-        make gcc g++ gfortran pkg-config python3-dev python3-pkgconfig && \
+        make gcc g++ gfortran pkg-config python3-dev python3-pkgconfig imagemagick && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
 
@@ -42,7 +42,7 @@ RUN export CC=mpicc      ; \
     pip install --no-cache-dir --no-binary=h5py h5py
 
 # Install other python modules
-RUN pip install --no-cache-dir pandas six scipy numpy
+RUN pip install --no-cache-dir pandas six scipy numpy matplotlib
 
 
 ################################################################################
